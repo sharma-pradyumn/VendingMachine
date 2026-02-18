@@ -13,14 +13,14 @@ public class ProductDispensingState extends MachineState {
         ProductEnum selectedProductType = machineContext.getSelectedProduct();
         int cost = selectedProductType.getPrice();
         if (machineContext.getUserMoney() < cost) {
-            System.out.println("Cannot dispense "+selectedProductType.toString()+" as current user money "+machineContext.getUserMoney()+" and product cost is "+cost);
+            System.out.println("Cannot dispense "+selectedProductType+" as current user money "+machineContext.getUserMoney()+" and product cost is "+cost);
             machineContext.setCurrentState(machineContext.getProductSelectedState());
             return new ProductDispenseResult(null,0);
         }
 
         int previousItemCount = machineContext.getInventory().getOrDefault(selectedProductType,0);
         if (previousItemCount == 0) {
-            System.out.println("Cannot select "+selectedProductType.toString()+" as empty for that product type");
+            System.out.println("Cannot select "+selectedProductType+" as empty for that product type");
             machineContext.setCurrentState(machineContext.getProductSelectedState());
             return new ProductDispenseResult(null,0);
         }

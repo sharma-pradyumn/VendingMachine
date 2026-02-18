@@ -9,10 +9,10 @@ public class VendingMachine {
     private ProductEnum selectedProduct;
     private MachineState currentState = waitingState;
 
-    private int machineMoney = 0;
+    private int machineMoney;
     private int userMoney = 0;
 
-    private LinkedHashMap<ProductEnum, Integer> inventory;
+    private final LinkedHashMap<ProductEnum, Integer> inventory;
 
     public VendingMachine(int _machineMoney) {
         machineMoney = _machineMoney;
@@ -43,7 +43,7 @@ public class VendingMachine {
     }
 
     public void refillInventory(ProductEnum productType, int numItem) {
-        inventory.compute(productType, (key, previousVal) -> {
+        inventory.compute(productType, (_, previousVal) -> {
             int newVal = previousVal != null ? previousVal : 0;
             return newVal+numItem;
         });
